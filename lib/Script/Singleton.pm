@@ -3,7 +3,20 @@ package Script::Singleton;
 use strict;
 use warnings;
 
+use Carp qw(croak);
+use IPC::Shareable;
+
 our $VERSION = '0.01';
+
+sub import {
+    my ($class, $glue, $warn) = @_;
+
+    if (! defined $glue) {
+        croak "Usage: use Script::Singleton GLUE;";
+    }
+
+    IPC::Shareable->singleton($glue, $warn);
+}
 
 sub __placeholder {}
 
@@ -12,7 +25,7 @@ __END__
 
 =head1 NAME
 
-Script::Singleton - One line description
+Script::Singleton - Ensure only a single instance of a script can run
 
 =for html
 <a href="https://github.com/stevieb9/script-singleton/actions"><img src="https://github.com/stevieb9/script-singleton/workflows/CI/badge.svg"/></a>
@@ -21,21 +34,19 @@ Script::Singleton - One line description
 
 =head1 SYNOPSIS
 
+    use Script::Singleton 'LOCK';
+
 =head1 DESCRIPTION
 
-=head1 METHODS
+Using shared memory, this distribution ensures only a single instance of any
+script can be running at any one time.
 
-=head2 name
+There are no functions or methods. All the work is performed in the B<use>
+line. C<LOCK> is the glue that identifies the shared memory segment. If a
+second parameter with a true value is sent in, we'll output a warning if the
+same script is run at the same time and it exits:
 
-Description.
-
-I<Parameters>:
-
-    $bar
-
-I<Mandatory, String>: The name of the thing with the guy and the place.
-
-I<Returns>: C<0> upon success.
+    use Script::Singleton 'LOCK', 1;
 
 =head1 AUTHOR
 
