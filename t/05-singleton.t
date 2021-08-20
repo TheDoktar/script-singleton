@@ -9,6 +9,6 @@ BEGIN {
     $ok = eval "use Script::Singleton; 1;";
 }
 
-is $ok, undef, "use Script::Singleton croaks if no glue sent in";
+is $ok, 1, "use Script::Singleton creates its own glue if not sent in";
 
 done_testing;

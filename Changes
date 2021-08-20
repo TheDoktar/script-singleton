@@ -1,7 +1,8 @@
 Revision history for Script-Singleton
 
-0.03 UNREL
-    -
+0.03    2021-08-19
+    - Changed parameters to hash format
+    - We now create a custom glue using path and filename if no glue sent in
 
 0.02    2021-08-18
     - Added better example lock string
