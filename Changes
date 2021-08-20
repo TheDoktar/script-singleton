@@ -1,5 +1,8 @@
 Revision history for Script-Singleton
 
+0.04 UNREL
+    -
+
 0.03    2021-08-19
     - Bump prereq of IPC::Shareable to 1.05 (from 1.03)
     - Changed parameters to hash format

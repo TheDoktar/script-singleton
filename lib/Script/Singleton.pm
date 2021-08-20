@@ -6,7 +6,7 @@ use warnings;
 use Cwd qw(abs_path);
 use IPC::Shareable;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub import {
     my ($class, %params) = @_;
