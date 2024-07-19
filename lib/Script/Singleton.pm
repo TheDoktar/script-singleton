@@ -13,7 +13,9 @@ sub import {
 
     $params{glue} = abs_path((caller())[1]) if ! exists $params{glue};
 
-    IPC::Shareable->singleton($params{glue}, $params{warn});
+    IPC::Shareable->singleton($params{glue}, $params{warn}) if (!$^C);
+    
+    $SIG{INT} = $SIG{TERM} = sub {IPC::Shareable->clean_up(); exit;  };     
 }
 
 sub __placeholder {}
